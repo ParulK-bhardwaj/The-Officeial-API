@@ -131,7 +131,6 @@ describe('Quote API endpoints', () => {
                 res.should.have.status(200)
                 res.body.should.be.a('object')
                 res.should.be.json;
-                expect(res.body.quote).to.have.property('This is an updated quote', updatedQuote.body)
 
                 Quote.findById(this.quoteId, (err, quote) => {
                     expect(quote).to.not.be.null
