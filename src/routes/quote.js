@@ -47,8 +47,8 @@ router.post('/', (req, res) => {
 /** Route to update an existing quote. */
 
 router.put('/:quoteId', (req, res) => {
-    const { body } = req.body;
-    Quote.findByIdAndUpdate(req.params.quoteId, { body }, { new: true })
+    const { content} = req.body;
+    Quote.findByIdAndUpdate(req.params.quoteId, { content }, { new: true })
         .then((updatedQuote) => {
             return res.json({ quote: updatedQuote });
         })

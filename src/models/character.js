@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const CharacterSchema = new Schema({
-    charactername: { type: String, required: true },
+    charactername: { type: String, required: true, unique: true},
     quotes : [{ type: Schema.Types.ObjectId, ref: "Quote" }]
   })
 

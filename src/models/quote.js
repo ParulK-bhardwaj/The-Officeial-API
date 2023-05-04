@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const QuoteSchema = new Schema({
-    body: { type: String, required: true },
+    content: { type: String, required: true },
     saidwho: { type: Schema.Types.ObjectId, ref: "Character", required: true },
 })
 

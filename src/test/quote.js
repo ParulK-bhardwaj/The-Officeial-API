@@ -46,7 +46,7 @@ describe('Quote API endpoints', () => {
 
             const quote = new Quote({
                 _id: SAMPLE_QUOTE_ID,
-                body: 'Test quote',
+                content: 'Test quote',
                 saidwho: character
             });
 
@@ -94,7 +94,7 @@ describe('Quote API endpoints', () => {
                 res.should.have.status(200)
                 res.body.should.be.a('object')
                 res.should.be.json;
-                res.body.should.have.property('body')
+                res.body.should.have.property('content')
                 res.body.should.have.property('saidwho')
                 done();
             });
@@ -102,7 +102,7 @@ describe('Quote API endpoints', () => {
 
     it('should post a new quote', (done) => {
         const newQuote = {
-            body: 'This is a new quote',
+            content: 'This is a new quote',
             saidwho: this.characterId
         };
 
@@ -113,7 +113,7 @@ describe('Quote API endpoints', () => {
                 res.should.have.status(200)
                 res.body.should.be.a('object')
                 res.should.be.json;
-                res.body.should.have.property('body').equal(newQuote.body)
+                res.body.should.have.property('content').equal(newQuote.content)
                 res.body.should.have.property('saidwho').equal(String(this.characterId))
                 done();
             });
@@ -121,7 +121,7 @@ describe('Quote API endpoints', () => {
 
     it('should update a quote', (done) => {
         const updatedQuote = {
-            body: 'This is an updated quote'
+            content: 'This is an updated quote'
         };
 
         chai.request(app)
@@ -134,7 +134,7 @@ describe('Quote API endpoints', () => {
 
                 Quote.findById(this.quoteId, (err, quote) => {
                     expect(quote).to.not.be.null
-                    expect(quote.body).to.equal(updatedQuote.body)
+                    expect(quote.content).to.equal(updatedQuote.content)
                     expect(quote.saidwho.toString()).to.equal(this.characterId.toString())
                 
                 done();
