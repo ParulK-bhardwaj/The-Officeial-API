@@ -153,4 +153,5 @@ describe('Quote API endpoints', () => {
                 });
             });
     });
+
 });

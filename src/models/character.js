@@ -3,6 +3,9 @@ const Schema = mongoose.Schema
 
 const CharacterSchema = new Schema({
     charactername: { type: String, required: true, unique: true},
+    jobtitle: { type: String, required: false}, 
+    personalitytraits: { type: String, required: false},
+    memorablemoment: { type: String, required: false}, 
     quotes : [{ type: Schema.Types.ObjectId, ref: "Quote" }]
   })
 

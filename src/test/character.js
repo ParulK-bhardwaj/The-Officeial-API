@@ -31,6 +31,9 @@ describe('Character API endpoints', () => {
     beforeEach((done) => {
         const sampleCharacter = new Character({
             charactername: 'mycharacter',
+            jobtitle: 'job',
+            description: 'character description',
+            memorablemoment: 'memory',
             _id: SAMPLE_OBJECT_ID
         })
         sampleCharacter.save()
@@ -73,11 +76,12 @@ describe('Character API endpoints', () => {
     it('should post a new character', (done) => {
         chai.request(app)
         .post('/characters')
-        .send({charactername: 'anothercharacter'})
+        .send({charactername: 'anothercharacter', jobtitle: 'manager'})
         .end((err, res) => {
             if (err) { done(err) }
             expect(res.body.character).to.be.an('object')
             expect(res.body.character).to.have.property('charactername', 'anothercharacter')
+            expect(res.body.character).to.have.property('jobtitle', 'manager')
 
             // check that character is actually inserted into database
             Character.findOne({charactername: 'anothercharacter'}).then(character => {
@@ -95,6 +99,7 @@ describe('Character API endpoints', () => {
             if (err) { done(err) }
             expect(res.body.character).to.be.an('object')
             expect(res.body.character).to.have.property('charactername', 'anothercharacter')
+            expect(res.body.character).to.have.property('jobtitle', 'job')
 
             // check that character is actually inserted into database
             Character.findOne({charactername: 'anothercharacter'}).then(character => {
@@ -119,4 +124,8 @@ describe('Character API endpoints', () => {
             })
         })
     })
+
+    after(function () {
+        return Character.findOneAndDelete({ charactername: 'mycharacter' });
+    });
 })

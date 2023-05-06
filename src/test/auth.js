@@ -24,7 +24,6 @@ describe('User', function () {
     // Signup
     it('should be able to signup', function (done) {
         User.findOneAndDelete({ username: 'testone' })
-       
             .then(function () {
                 agent
                     .post('/auth/sign-up')
