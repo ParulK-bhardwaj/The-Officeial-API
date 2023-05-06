@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+
+  <style>
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    .theme-switch {
+      display: inline-block;
+      height: 34px;
+      position: relative;
+      width: 60px;
+    }
+
+    .theme-switch input {
+      display:none;
+    }
+
+    .slider {
+      background-color: #ccc;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      background-color: #fff;
+      bottom: 2px;
+      content: "";
+      height: 30px;
+      left: 2px;
+      position: absolute;
+      transition: .4s;
+      width: 30px;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #1f1f1f;
+      color: #ddd;
+    }
+
+    .dark-mode .theme-switch em {
+      color: #ddd;
+    }
+
+    .dark-mode .slider {
+      background-color: #ddd;
+    }
+
+    .dark-mode input:checked + .slider {
+      background-color: #ddd;
+    }
+
+    .dark-mode input:checked + .slider:before {
+      background-color: #1f1f1f;
+    }
+
+    body {
+      background-color: #fff;
+      color: #333;
+    }
+
+    .dark-mode .sidebar {
+      background-color: #333;
+      color: white
+    }
+  </style>
+</head>
+<body class="light-mode">
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" />
+      <div class="slider round"></div>
+    </label>
+    <em>Dark Mode</em>
+  </div>
+  <div id="app"></div>
+
+  <script>
+    const toggleSwitch = document.querySelector('#checkbox');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+        document.body.classList.add('dark-mode');
+      }
+    }
+
+    function switchTheme(e) {
+      if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        document.body.classList.add('dark-mode');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        document.body.classList.remove('dark-mode');
+      }
+    }
+  
+    toggleSwitch.addEventListener('change', switchTheme, false);
+  </script>
+
+  <script>
+    window.$docsify = {
+      name: '',
+      repo: ''
+    }
+  </script>
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+</body>
+</html>
